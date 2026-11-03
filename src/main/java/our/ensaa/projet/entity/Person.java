@@ -26,8 +26,16 @@ public abstract class Person {
     @Column(nullable = false, length = 50)
     private String prenom;
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Column(nullable = false, length = 30)
-    private Roles role = Roles.ADMIN;
+    private Role role;
 
     @Column(nullable = false, unique = true, length = 100)
     private String email;
@@ -45,12 +53,13 @@ public abstract class Person {
     }
 
     protected Person(String nom, String prenom, String email, String telephone,
-                     LocalDate dateNaissance) {
+                     LocalDate dateNaissance, Role role) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.telephone = telephone;
         this.dateNaissance = dateNaissance;
+        this.role=role;
 //        this.motDePasse = motDePasse;
     }
 

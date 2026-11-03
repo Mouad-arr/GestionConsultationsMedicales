@@ -23,19 +23,11 @@ public class Admin extends Person {
 
     public Admin(String nom, String prenom, String email, String telephone,
                  LocalDate dateNaissance, String motDePasse, Role role) {
-        super(nom, prenom, email, telephone, dateNaissance );
+        super(nom, prenom, email, telephone, dateNaissance, role );
         this.dateCreation = LocalDate.now();
         this.motDePasse = motDePasse;
-        this.r
     }
 
-    public Roles getRole() {
-        return role;
-    }
-
-    public void setRole(Roles role) {
-        this.role = role;
-    }
 
     public LocalDate getDateCreation() {
         return dateCreation;
