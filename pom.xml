@@ -15,7 +15,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+
     <dependencies>
+        <!-- JPA API (annotations used by the entity classes) -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.48</version>
+        </dependency>
 
         <!-- Hibernate ORM -->
         <dependency>
@@ -30,25 +44,6 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>9.5.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>5.0.0</version>
-            <scope>provided</scope> <!-- Tomcat fournit cette dépendance -->
-        </dependency>
-
     </dependencies>
-
-    <build>
-        <plugins>
-            <!-- Plugin pour générer un WAR -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
