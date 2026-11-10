@@ -1,4 +1,4 @@
 package our.ensaa.projet.service;
 
-public class AdminService {
+public class AdminService implements MedcinTraitement {
 }
