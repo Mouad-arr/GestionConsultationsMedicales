@@ -1,10 +1,6 @@
 package our.ensaa.projet.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -25,14 +21,6 @@ public abstract class Person {
 
     @Column(nullable = false, length = 50)
     private String prenom;
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     @Column(nullable = false, length = 30)
     private Role role;
@@ -109,6 +97,14 @@ public abstract class Person {
 
     public void setDateNaissance(LocalDate dateNaissance) {
         this.dateNaissance = dateNaissance;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
 //    public String getMotDePasse() {

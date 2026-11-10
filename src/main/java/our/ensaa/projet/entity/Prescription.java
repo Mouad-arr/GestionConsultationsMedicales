@@ -31,10 +31,6 @@ public class Prescription {
     @Column(length = 300)
     private String instructions;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "consultation_id", nullable = false)
-    private Consultation consultation;
-
     public Prescription() {
     }
 

@@ -7,7 +7,6 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "admin")
 public class Admin extends Person {
 
     @Column(nullable = false)

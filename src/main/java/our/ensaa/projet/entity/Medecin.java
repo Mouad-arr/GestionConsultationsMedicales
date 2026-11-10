@@ -7,16 +7,15 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "medecin")
 public class Medecin extends Person {
 
     /** Speciality, e.g. "Cardiologie", "Pediatrie"... */
     @Column(length = 80)
     private String specialite;
 
-    /** Official order number (numero ordre des medecins). */
-    @Column(unique = true, length = 20)
-    private String numeroOrdre;
+//    /** Official order number (numero ordre des medecins). */String
+//    @Column(unique = true, length = 20)
+//    private String numeroOrdre;
 
     @Column(nullable = false)
     private String motDePasse;
@@ -28,10 +27,10 @@ public class Medecin extends Person {
 
     public Medecin(String nom, String prenom, String email, String telephone,
                    LocalDate dateNaissance, String motDePasse,
-                   String specialite, String numeroOrdre) {
-        super(nom, prenom, email, telephone, dateNaissance);
+                   String specialite, Role role) {
+        super(nom, prenom, email, telephone, dateNaissance, role);
         this.specialite = specialite;
-        this.numeroOrdre = numeroOrdre;
+//        this.numeroOrdre = numeroOrdre;
         this.motDePasse = motDePasse;
     }
 
@@ -43,13 +42,13 @@ public class Medecin extends Person {
         this.specialite = specialite;
     }
 
-    public String getNumeroOrdre() {
-        return numeroOrdre;
-    }
-
-    public void setNumeroOrdre(String numeroOrdre) {
-        this.numeroOrdre = numeroOrdre;
-    }
+//    public String getNumeroOrdre() {
+//        return numeroOrdre;
+//    }
+//
+//    public void setNumeroOrdre(String numeroOrdre) {
+//        this.numeroOrdre = numeroOrdre;
+//    }
 
     public String getMotDePasse() {
         return motDePasse;

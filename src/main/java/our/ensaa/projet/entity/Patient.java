@@ -7,7 +7,6 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "patient")
 public class Patient extends Person {
 
     /** Medical record number, generated when the patient is registered. */
@@ -17,14 +16,16 @@ public class Patient extends Person {
     @Column(length = 5)
     private String groupeSanguin;
 
+
+
     public Patient() {
         super();
     }
 
     public Patient(String nom, String prenom, String email, String telephone,
                    LocalDate dateNaissance,
-                   String numeroDossier, String groupeSanguin) {
-        super(nom, prenom, email, telephone, dateNaissance);
+                   String numeroDossier, String groupeSanguin, Role role) {
+        super(nom, prenom, email, telephone, dateNaissance, role);
         this.numeroDossier = numeroDossier;
         this.groupeSanguin = groupeSanguin;
     }

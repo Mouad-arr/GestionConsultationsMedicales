@@ -44,6 +44,10 @@ public class Consultation {
                fetch = FetchType.LAZY)
     private List<Prescription> prescriptions = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, length = 30)
+    private StatusConsultation status = StatusConsultation.Planifie;
+
     public Consultation() {
     }
 
@@ -120,5 +124,13 @@ public class Consultation {
 
     public void setPrescriptions(List<Prescription> prescriptions) {
         this.prescriptions = prescriptions;
+    }
+
+    public StatusConsultation getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusConsultation status) {
+        this.status = status;
     }
 }
