@@ -10,8 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "consultation")
@@ -39,11 +37,6 @@ public class Consultation {
               cascade = CascadeType.ALL, orphanRemoval = true)
     private Diagnostic diagnostic;
 
-    @OneToMany(mappedBy = "consultation",
-               cascade = CascadeType.ALL, orphanRemoval = true,
-               fetch = FetchType.LAZY)
-    private List<Prescription> prescriptions = new ArrayList<>();
-
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 30)
     private StatusConsultation status = StatusConsultation.Planifie;
@@ -57,17 +50,6 @@ public class Consultation {
         this.observations = observations;
         this.patient = patient;
         this.medecin = medecin;
-    }
-
-    /** Keeps both sides of the relationship consistent. */
-    public void addPrescription(Prescription prescription) {
-        prescriptions.add(prescription);
-        prescription.setConsultation(this);
-    }
-
-    public void removePrescription(Prescription prescription) {
-        prescriptions.remove(prescription);
-        prescription.setConsultation(null);
     }
 
     public Long getId() {
@@ -116,14 +98,6 @@ public class Consultation {
 
     public void setDiagnostic(Diagnostic diagnostic) {
         this.diagnostic = diagnostic;
-    }
-
-    public List<Prescription> getPrescriptions() {
-        return prescriptions;
-    }
-
-    public void setPrescriptions(List<Prescription> prescriptions) {
-        this.prescriptions = prescriptions;
     }
 
     public StatusConsultation getStatus() {

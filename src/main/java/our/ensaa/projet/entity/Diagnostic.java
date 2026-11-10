@@ -3,6 +3,8 @@ package our.ensaa.projet.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "diagnostic")
@@ -22,6 +24,11 @@ public class Diagnostic {
     @OneToOne(optional = false)
     @JoinColumn(name = "consultation_id", nullable = false, unique = true)
     private Consultation consultation;
+
+    @OneToMany(mappedBy = "diagnostic",
+               cascade = CascadeType.ALL, orphanRemoval = true,
+               fetch = FetchType.LAZY)
+    private List<Prescription> prescriptions = new ArrayList<>();
 
     public Diagnostic() {
     }
@@ -63,4 +70,23 @@ public class Diagnostic {
     public void setConsultation(Consultation consultation) {
         this.consultation = consultation;
     }
+
+    public List<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(List<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
+    }
+
+//    /** Keeps both sides of the relationship consistent. */
+//    public void addPrescription(Prescription prescription) {
+//        prescriptions.add(prescription);
+//        prescription.setDiagnostic(this);
+//    }
+//
+//    public void removePrescription(Prescription prescription) {
+//        prescriptions.remove(prescription);
+//        prescription.setDiagnostic(null);
+//    }
 }

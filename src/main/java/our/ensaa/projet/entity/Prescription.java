@@ -31,6 +31,11 @@ public class Prescription {
     @Column(length = 300)
     private String instructions;
 
+    /** Owning side of the many-to-one relation with Diagnostic. */
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "diagnostic_id", nullable = false)
+    private Diagnostic diagnostic;
+
     public Prescription() {
     }
 
@@ -81,11 +86,11 @@ public class Prescription {
         this.instructions = instructions;
     }
 
-    public Consultation getConsultation() {
-        return consultation;
+    public Diagnostic getDiagnostic() {
+        return diagnostic;
     }
 
-    public void setConsultation(Consultation consultation) {
-        this.consultation = consultation;
+    public void setDiagnostic(Diagnostic diagnostic) {
+        this.diagnostic = diagnostic;
     }
 }
