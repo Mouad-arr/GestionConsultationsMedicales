@@ -12,4 +12,5 @@ public interface MedcinTraitement {
     public Medecin getInfoMedicinById(Long medecinId);
     public List<Consultation> getLesTroisPremiersUpcomingConsultationsByMedecinId(Long medecinId);
     public List<Consultation> getLesTroisDerniersConsultationsTerminerByMedecinId(Long medecinId);
+    public Consultation getConsultationById(Long consultationId,Long medcinId);
 }
