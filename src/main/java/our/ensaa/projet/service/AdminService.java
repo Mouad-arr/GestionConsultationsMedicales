@@ -2,6 +2,7 @@ package our.ensaa.projet.service;
 
 import our.ensaa.projet.entity.Consultation;
 import our.ensaa.projet.entity.Medecin;
+import our.ensaa.projet.entity.Patient;
 
 import java.util.List;
 
@@ -33,6 +34,25 @@ public class AdminService implements MedcinTraitement {
     @Override
     public Consultation getConsultationById(Long consultationId, Long medcinId) {
         // Implementation
+        return null;
+    }
+
+    // ---------------------------------------------------------------------
+    //  Admin : gestion globale (médecins, patients, consultations)
+    // ---------------------------------------------------------------------
+
+    public List<Medecin> getAllMedecins() {
+        // TODO: Implementation
+        return null;
+    }
+
+    public List<Patient> getAllPatients() {
+        // TODO: Implementation
+        return null;
+    }
+
+    public List<Consultation> getAllConsultations() {
+        // TODO: Implementation
         return null;
     }
 }
