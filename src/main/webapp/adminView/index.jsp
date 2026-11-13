@@ -63,9 +63,9 @@
                     <div class="stat-card">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <div class="stat-label">Consultations</div>
+                                <div class="stat-label">Consultations du jour</div>
                                 <div class="stat-value">
-                                    ${consultations.size()}
+                                    ${consultationsDuJour.size()}
                                 </div>
                             </div>
                             <div class="stat-icon icon-orange">
@@ -77,12 +77,12 @@
 
             </div>
 
-            <!-- Dernières consultations -->
+            <!-- Consultations du jour -->
             <div class="content-card">
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 class="section-title mb-0">
-                        Dernières consultations
+                        Consultations du jour
                     </h2>
 
                     <a href="${ctx}/admin/consultations"
@@ -98,13 +98,13 @@
                             <th>ID</th>
                             <th>Patient</th>
                             <th>Médecin</th>
-                            <th>Date</th>
+                            <th>Heure</th>
                             <th>Statut</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        <c:forEach var="c" items="${consultations}">
+                        <c:forEach var="c" items="${consultationsDuJour}">
                             <tr>
                                 <td class="fw-semibold">#${c.id}</td>
 
@@ -124,8 +124,8 @@
                                 </td>
 
                                 <td>
-                                    <i class="fa-regular fa-calendar text-muted me-1"></i>
-                                    ${c.getDateConsultation().toLocalDate()}
+                                    <i class="fa-regular fa-clock text-muted me-1"></i>
+                                    ${c.getDateConsultation().toLocalTime()}
                                 </td>
 
                                 <td>
@@ -136,13 +136,13 @@
                             </tr>
                         </c:forEach>
 
-                        <c:if test="${empty consultations}">
+                        <c:if test="${empty consultationsDuJour}">
                             <tr>
                                 <td colspan="5" class="text-center py-5">
                                     <div class="text-muted">
                                         <i class="fa-regular fa-calendar-xmark fs-1 mb-3"></i>
-                                        <p class="fw-semibold mb-1">Aucune consultation</p>
-                                        <small>Les consultations apparaîtront ici.</small>
+                                        <p class="fw-semibold mb-1">Aucune consultation aujourd'hui</p>
+                                        <small>Les consultations du jour apparaîtront ici.</small>
                                     </div>
                                 </td>
                             </tr>

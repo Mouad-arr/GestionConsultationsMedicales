@@ -72,15 +72,38 @@
                     </span>
                 </div>
 
+                <!-- Search -->
+                <form class="row g-2 align-items-end mb-4" action="${ctx}/admin/patients" method="get">
+                    <div class="col-md-4">
+                        <label class="form-label small text-muted mb-1">Rechercher</label>
+                        <input type="text" name="search" value="${param.search}"
+                               class="form-control" placeholder="Nom, prénom ou CIN...">
+                    </div>
+
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-magnifying-glass me-1"></i>
+                            Rechercher
+                        </button>
+                    </div>
+
+                    <div class="col-auto">
+                        <a href="${ctx}/admin/patients" class="btn btn-outline-secondary">
+                            Réinitialiser
+                        </a>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                         <tr>
                             <th>ID</th>
                             <th>Patient</th>
+                            <th>CIN</th>
+                            <th>Sexe</th>
                             <th>Email</th>
-                            <th>N° dossier</th>
-                            <th>Groupe sanguin</th>
+                            <th>Téléphone</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -102,17 +125,19 @@
                                 </td>
 
                                 <td>
+                                    <c:out value="${p.getCin()}"/>
+                                </td>
+
+                                <td>
+                                    <c:out value="${p.getSexe().getLibelle()}"/>
+                                </td>
+
+                                <td>
                                     <c:out value="${p.getEmail()}"/>
                                 </td>
 
                                 <td>
-                                    <span class="badge bg-secondary-subtle text-secondary">
-                                        <c:out value="${p.getNumeroDossier()}"/>
-                                    </span>
-                                </td>
-
-                                <td>
-                                    <c:out value="${p.getGroupeSanguin()}"/>
+                                    <c:out value="${p.getTelephone()}"/>
                                 </td>
 
                                 <td>
@@ -136,7 +161,7 @@
 
                         <c:if test="${empty patients}">
                             <tr>
-                                <td colspan="6" class="text-center py-5">
+                                <td colspan="7" class="text-center py-5">
                                     <div class="text-muted">
                                         <i class="fa-solid fa-hospital-user fs-1 mb-3"></i>
                                         <p class="fw-semibold mb-1">Aucun patient enregistré</p>

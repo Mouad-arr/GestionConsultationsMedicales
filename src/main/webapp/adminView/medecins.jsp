@@ -72,14 +72,49 @@
                     </span>
                 </div>
 
+                <!-- Search / filter -->
+                <form class="row g-2 align-items-end mb-4" action="${ctx}/admin/medecins" method="get">
+                    <div class="col-md-4">
+                        <label class="form-label small text-muted mb-1">Rechercher</label>
+                        <input type="text" name="search" value="${param.search}"
+                               class="form-control" placeholder="Nom du médecin...">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label small text-muted mb-1">Spécialité</label>
+                        <select name="specialite" class="form-select">
+                            <option value="">Toutes les spécialités</option>
+                            <!-- TODO: populate dynamically from the DB -->
+                            <option value="Cardiologie" ${param.specialite == 'Cardiologie' ? 'selected' : ''}>Cardiologie</option>
+                            <option value="Pédiatrie" ${param.specialite == 'Pédiatrie' ? 'selected' : ''}>Pédiatrie</option>
+                            <option value="Dermatologie" ${param.specialite == 'Dermatologie' ? 'selected' : ''}>Dermatologie</option>
+                            <option value="Généraliste" ${param.specialite == 'Généraliste' ? 'selected' : ''}>Généraliste</option>
+                        </select>
+                    </div>
+
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-magnifying-glass me-1"></i>
+                            Filtrer
+                        </button>
+                    </div>
+
+                    <div class="col-auto">
+                        <a href="${ctx}/admin/medecins" class="btn btn-outline-secondary">
+                            Réinitialiser
+                        </a>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                         <tr>
                             <th>ID</th>
                             <th>Médecin</th>
-                            <th>Email</th>
                             <th>Spécialité</th>
+                            <th>N° ordre</th>
+                            <th>Email</th>
                             <th>Téléphone</th>
                             <th>Actions</th>
                         </tr>
@@ -102,13 +137,17 @@
                                 </td>
 
                                 <td>
-                                    <c:out value="${m.getEmail()}"/>
-                                </td>
-
-                                <td>
                                     <span class="badge bg-primary-subtle text-primary">
                                         <c:out value="${m.getSpecialite()}"/>
                                     </span>
+                                </td>
+
+                                <td>
+                                    <c:out value="${m.getNumeroOrdre()}"/>
+                                </td>
+
+                                <td>
+                                    <c:out value="${m.getEmail()}"/>
                                 </td>
 
                                 <td>
@@ -136,7 +175,7 @@
 
                         <c:if test="${empty medecins}">
                             <tr>
-                                <td colspan="6" class="text-center py-5">
+                                <td colspan="7" class="text-center py-5">
                                     <div class="text-muted">
                                         <i class="fa-solid fa-user-doctor fs-1 mb-3"></i>
                                         <p class="fw-semibold mb-1">Aucun médecin enregistré</p>

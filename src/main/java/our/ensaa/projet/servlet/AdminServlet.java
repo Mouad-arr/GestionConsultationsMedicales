@@ -30,19 +30,25 @@ public class AdminServlet extends HttpServlet {
 
         String path = request.getServletPath();
 
-        // TODO: replace these with real service calls once implemented.
+        // TODO: handle search/filter params once services are implemented:
+        //   - search     (patients par nom/prénom/CIN, médecins par nom)
+        //   - specialite (médecins)
+        //   - statut / date / medecin (consultations)
         List<Medecin> medecins = adminService.getAllMedecins();
         List<Patient> patients = adminService.getAllPatients();
         List<Consultation> consultations = adminService.getAllConsultations();
+        List<Consultation> consultationsDuJour = adminService.getConsultationsDuJour();
 
         // Guard against null (services return null until implemented).
         if (medecins == null) medecins = new ArrayList<>();
         if (patients == null) patients = new ArrayList<>();
         if (consultations == null) consultations = new ArrayList<>();
+        if (consultationsDuJour == null) consultationsDuJour = new ArrayList<>();
 
         request.setAttribute("medecins", medecins);
         request.setAttribute("patients", patients);
         request.setAttribute("consultations", consultations);
+        request.setAttribute("consultationsDuJour", consultationsDuJour);
 
         switch (path) {
             case "/admin" -> request.getRequestDispatcher("/adminView/index.jsp").forward(request, response);

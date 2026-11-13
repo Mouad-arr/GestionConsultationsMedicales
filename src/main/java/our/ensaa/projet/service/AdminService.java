@@ -55,4 +55,9 @@ public class AdminService implements MedcinTraitement {
         // TODO: Implementation
         return null;
     }
+
+    public List<Consultation> getConsultationsDuJour() {
+        // TODO: Implementation (consultations dont la date = aujourd'hui)
+        return null;
+    }
 }

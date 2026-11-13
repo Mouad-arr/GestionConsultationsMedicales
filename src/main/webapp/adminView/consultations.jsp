@@ -64,6 +64,43 @@
                     </span>
                 </div>
 
+                <!-- Filters -->
+                <form class="row g-2 align-items-end mb-4" action="${ctx}/admin/consultations" method="get">
+                    <div class="col-md-3">
+                        <label class="form-label small text-muted mb-1">Statut</label>
+                        <select name="statut" class="form-select">
+                            <option value="">Tous les statuts</option>
+                            <option value="Planifie" ${param.statut == 'Planifie' ? 'selected' : ''}>Planifiée</option>
+                            <option value="TERMINEE" ${param.statut == 'TERMINEE' ? 'selected' : ''}>Terminée</option>
+                            <option value="ANNULEE" ${param.statut == 'ANNULEE' ? 'selected' : ''}>Annulée</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label small text-muted mb-1">Date</label>
+                        <input type="date" name="date" value="${param.date}" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label small text-muted mb-1">Médecin</label>
+                        <input type="text" name="medecin" value="${param.medecin}"
+                               class="form-control" placeholder="Nom du médecin...">
+                    </div>
+
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-magnifying-glass me-1"></i>
+                            Filtrer
+                        </button>
+                    </div>
+
+                    <div class="col-auto">
+                        <a href="${ctx}/admin/consultations" class="btn btn-outline-secondary">
+                            Réinitialiser
+                        </a>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -73,6 +110,7 @@
                             <th>Médecin</th>
                             <th>Date</th>
                             <th>Heure</th>
+                            <th>Motif</th>
                             <th>Statut</th>
                         </tr>
                         </thead>
@@ -108,6 +146,10 @@
                                 </td>
 
                                 <td>
+                                    <c:out value="${c.getMotif()}"/>
+                                </td>
+
+                                <td>
                                     <span class="badge bg-primary-subtle text-primary">
                                         <c:out value="${c.getStatus().getLibelle()}"/>
                                     </span>
@@ -117,7 +159,7 @@
 
                         <c:if test="${empty consultations}">
                             <tr>
-                                <td colspan="6" class="text-center py-5">
+                                <td colspan="7" class="text-center py-5">
                                     <div class="text-muted">
                                         <i class="fa-regular fa-folder-open fs-1 mb-3"></i>
                                         <p class="fw-semibold mb-1">Aucune consultation</p>
