@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
+import lombok.Builder;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -39,6 +41,7 @@ public class Consultation {
 
     @OneToOne(mappedBy = "consultation",
               cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "diagnostic_id")
     private Diagnostic diagnostic;
 
     @Enumerated(EnumType.STRING)
