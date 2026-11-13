@@ -22,6 +22,7 @@ public abstract class Person {
     @Column(nullable = false, length = 50)
     private String prenom;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     private Role role;
 

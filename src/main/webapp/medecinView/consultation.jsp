@@ -47,7 +47,7 @@
                 </h2>
 
                 <span class="badge bg-primary-subtle text-primary px-3 py-2">
-                    <c:out value="${consultation.getStatus().getLibelle()}"/>
+                    <c:out value="${consultation.status}"/>
                 </span>
 
             </div>
@@ -177,16 +177,15 @@
 
                         <c:choose>
 
-                            <c:when test="${consultation.getDiagnostic().getPrescription() != null}">
-
-                                <div class="medical-description prescription-box">
-                                    <p class="mb-0">
-                                        <c:out value="${consultation.getDiagnostic().getPrescription().getDescription()}"/>
-                                    </p>
-                                </div>
-
+                            <c:when test="${consultation.getDiagnostic().getPrescriptions() != null}">
+                                <c:forEach  var="prescription" items="${consultation.getDiagnostic().getPrescriptions()}">
+                                    <div class="medical-description prescription-box mb-3">
+                                        <p class="mb-0">
+                                            <c:out value="${prescription.getDescription()}"/>
+                                        </p>
+                                    </div>
+                                </c:forEach>
                             </c:when>
-
                             <c:otherwise>
 
                                 <div class="alert alert-light border mb-0">

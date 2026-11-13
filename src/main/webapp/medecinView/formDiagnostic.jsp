@@ -93,7 +93,7 @@
                 <hr class="my-4">
 
                 <!-- Prescription -->
-                <div class="mb-4">
+               <!-- <div class="mb-4">
 
                     <h3 class="section-title">
                         <i class="fa-solid fa-prescription text-success me-2"></i>
@@ -108,9 +108,9 @@
                 </div>
 
                 <div class="row g-3">
-
+                -->
                     <!-- Medicament -->
-                    <div class="col-md-6">
+              <!--      <div class="col-md-6">
 
                         <label for="medicament" class="form-label fw-semibold">
                             <i class="fa-solid fa-pills text-muted me-1"></i>
@@ -125,9 +125,9 @@
                                 placeholder="Nom du médicament">
 
                     </div>
-
+                    -->
                     <!-- Posologie -->
-                    <div class="col-md-6">
+               <!--     <div class="col-md-6">
 
                         <label for="posologie" class="form-label fw-semibold">
                             <i class="fa-solid fa-prescription-bottle-medical text-muted me-1"></i>
@@ -143,8 +143,8 @@
 
                     </div>
 
-                    <!-- Duree -->
-                    <div class="col-md-6">
+                  -->  <!-- Duree -->
+               <!--    <div class="col-md-6">
 
                         <label for="duree" class="form-label fw-semibold">
                             <i class="fa-solid fa-calendar-days text-muted me-1"></i>
@@ -160,8 +160,8 @@
 
                     </div>
 
-                    <!-- Instructions -->
-                    <div class="col-md-6">
+                  -->  <!-- Instructions -->
+                 <!--   <div class="col-md-6">
 
                         <label for="instructions" class="form-label fw-semibold">
                             <i class="fa-solid fa-clipboard-list text-muted me-1"></i>
@@ -178,6 +178,7 @@
                     </div>
 
                 </div>
+               -->
 
                 <!-- Actions -->
                 <div class="d-flex justify-content-end gap-2 mt-5 flex-wrap">

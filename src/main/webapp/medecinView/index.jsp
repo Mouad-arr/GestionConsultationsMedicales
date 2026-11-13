@@ -132,7 +132,7 @@
 
                                 <td>
                                     <span class="badge bg-primary-subtle text-primary">
-                                        <c:out value="${c.getStatut().getLibelle()}"/>
+                                        <c:out value="${c.status}"/>
                                     </span>
                                 </td>
                             </tr>
@@ -190,7 +190,7 @@
 
                                 <td>
                                     <span class="badge bg-success-subtle text-success">
-                                        <c:out value="${c.getStatus().getLibelle()}"/>
+                                        <c:out value="${c.getStatus()}"/>
                                     </span>
                                 </td>
                             </tr>

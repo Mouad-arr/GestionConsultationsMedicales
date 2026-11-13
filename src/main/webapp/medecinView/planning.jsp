@@ -151,15 +151,20 @@
 
                             <td>
                                 <span class="badge bg-primary-subtle text-primary">
-                                    <c:out value="${c.getStatut().getLibelle()}"/>
+                                    <c:out value="${c.getStatus()}"/>
                                 </span>
                             </td>
 
                             <td>
-                                <a href="${ctx}/diagnostic?ConsultationId=${c.id}"
+                                <a href="${ctx}/medecin/diagnostic?ConsultationId=${c.id}"
                                    class="btn btn-sm btn-primary">
                                     <i class="fa-solid fa-file-medical me-1"></i>
                                     Établir le diagnostic
+                                </a>
+                                <a href="${ctx}/medecin/diagnostic?ConsultationId=${c.id}&annuler=${true}"
+                                   class="btn btn-sm btn-primary">
+                                    <i class="fa-solid fa-file-medical me-1"></i>
+                                    Annuler
                                 </a>
                             </td>
 

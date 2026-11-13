@@ -128,12 +128,12 @@
 
                             <td>
                                 <span class="badge bg-success-subtle text-success">
-                                    <c:out value="${c.getStatus().getLibelle()}"/>
+                                    <c:out value="${c.status}"/>
                                 </span>
                             </td>
 
                             <td>
-                                <a href="${ctx}/medecin/consultation?Id=${c.id}"
+                                <a href="${ctx}/medecin/consultation?ConsultationId=${c.id}"
                                    class="btn btn-sm btn-outline-primary">
 
                                     <i class="fa-solid fa-eye me-1"></i>

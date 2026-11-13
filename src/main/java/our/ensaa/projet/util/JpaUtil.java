@@ -1,5 +1,6 @@
 package our.ensaa.projet.util;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.Map;
@@ -17,5 +18,8 @@ public class JpaUtil {
 
     public static EntityManagerFactory getEmf() {
         return emf;
+    }
+    public static EntityManager getEntityManager() {
+        return emf.createEntityManager();
     }
 }
