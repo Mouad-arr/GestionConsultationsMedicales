@@ -27,6 +27,10 @@ public class Consultation {
     @Column(length = 2000)
     private String observations;
 
+    /** Motif de la consultation (raison du rendez-vous). */
+    @Column(length = 255)
+    private String motif;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
@@ -77,6 +81,14 @@ public class Consultation {
 
     public void setObservations(String observations) {
         this.observations = observations;
+    }
+
+    public String getMotif() {
+        return motif;
+    }
+
+    public void setMotif(String motif) {
+        this.motif = motif;
     }
 
     public Patient getPatient() {

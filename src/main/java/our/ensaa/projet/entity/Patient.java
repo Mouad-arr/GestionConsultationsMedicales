@@ -2,6 +2,8 @@ package our.ensaa.projet.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
@@ -15,6 +17,17 @@ public class Patient extends Person {
 
     @Column(length = 5)
     private String groupeSanguin;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 10)
+    private Sexe sexe;
+
+    /** Carte d'identité nationale (unique). */
+    @Column(nullable = false, unique = true, length = 20)
+    private String cin;
+
+    @Column(length = 255)
+    private String adresse;
 
 
 
@@ -44,5 +57,29 @@ public class Patient extends Person {
 
     public void setGroupeSanguin(String groupeSanguin) {
         this.groupeSanguin = groupeSanguin;
+    }
+
+    public Sexe getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(Sexe sexe) {
+        this.sexe = sexe;
+    }
+
+    public String getCin() {
+        return cin;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
 }

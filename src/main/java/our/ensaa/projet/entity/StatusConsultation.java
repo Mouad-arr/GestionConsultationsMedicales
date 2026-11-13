@@ -7,7 +7,17 @@ package our.ensaa.projet.entity;
  * the class diagram only defines the enum itself.
  */
 public enum StatusConsultation {
-    Planifie,
-    TERMINEE,
-    ANNULEE
+    Planifie("Planifiée"),
+    TERMINEE("Terminée"),
+    ANNULEE("Annulée");
+
+    private final String libelle;
+
+    StatusConsultation(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
 }

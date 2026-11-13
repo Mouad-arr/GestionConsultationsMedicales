@@ -13,9 +13,9 @@ public class Medecin extends Person {
     @Column(length = 80)
     private String specialite;
 
-//    /** Official order number (numero ordre des medecins). */String
-//    @Column(unique = true, length = 20)
-//    private String numeroOrdre;
+    /** Official order number (numero ordre des medecins). */
+    @Column(unique = true, length = 20)
+    private String numeroOrdre;
 
     @Column(nullable = false)
     private String motDePasse;
@@ -30,7 +30,6 @@ public class Medecin extends Person {
                    String specialite, Role role) {
         super(nom, prenom, email, telephone, dateNaissance, role);
         this.specialite = specialite;
-//        this.numeroOrdre = numeroOrdre;
         this.motDePasse = motDePasse;
     }
 
@@ -42,13 +41,13 @@ public class Medecin extends Person {
         this.specialite = specialite;
     }
 
-//    public String getNumeroOrdre() {
-//        return numeroOrdre;
-//    }
-//
-//    public void setNumeroOrdre(String numeroOrdre) {
-//        this.numeroOrdre = numeroOrdre;
-//    }
+    public String getNumeroOrdre() {
+        return numeroOrdre;
+    }
+
+    public void setNumeroOrdre(String numeroOrdre) {
+        this.numeroOrdre = numeroOrdre;
+    }
 
     public String getMotDePasse() {
         return motDePasse;
