@@ -39,32 +39,38 @@ public class AdminService implements AdminInterface{
     // ---------------------------------------------------------------------
     //  Médecins
     // ---------------------------------------------------------------------
-
+    @Override
     public List<Medecin> getAllMedecins() {
         return medecinRepository.findAll();
     }
 
+    @Override
     public List<Medecin> getMedecinsFiltered(String search, String specialite) {
         return medecinRepository.search(search, specialite);
     }
 
+    @Override
     public Medecin getMedecinById(Long id) {
         return medecinRepository.getMedecinById(id).orElse(null);
     }
 
+    @Override
     public List<String> getAllSpecialites() {
         return medecinRepository.findAllSpecialites();
     }
 
+    @Override
     public void saveMedecin(Medecin medecin) {
         medecin.setRole(Role.MEDECIN);
         medecinRepository.save(medecin);
     }
 
+    @Override
     public void updateMedecin(Medecin medecin) {
         medecinRepository.update(medecin);
     }
 
+    @Override
     public void deleteMedecin(Long id) {
         medecinRepository.delete(id);
     }
@@ -73,27 +79,33 @@ public class AdminService implements AdminInterface{
     //  Patients
     // ---------------------------------------------------------------------
 
+    @Override
     public List<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
 
+    @Override
     public List<Patient> getPatientsFiltered(String search) {
         return patientRepository.search(search);
     }
 
+    @Override
     public Patient getPatientById(Long id) {
         return patientRepository.findById(id).orElse(null);
     }
 
+    @Override
     public void savePatient(Patient patient) {
         patient.setRole(Role.PATIENT);
         patientRepository.save(patient);
     }
 
+    @Override
     public void updatePatient(Patient patient) {
         patientRepository.update(patient);
     }
 
+    @Override
     public void deletePatient(Long id) {
         patientRepository.delete(id);
     }
@@ -102,14 +114,17 @@ public class AdminService implements AdminInterface{
     //  Consultations (global, read-only from the admin console)
     // ---------------------------------------------------------------------
 
+    @Override
     public List<Consultation> getAllConsultations() {
         return consultationRepository.findAll();
     }
 
+    @Override
     public List<Consultation> getConsultationsDuJour() {
         return consultationRepository.findConsultationsDuJour();
     }
 
+    @Override
     public List<Consultation> getConsultationsFiltered(String statut, String date, String medecin) {
         return consultationRepository.search(parseStatus(statut), parseDate(date), medecin);
     }
