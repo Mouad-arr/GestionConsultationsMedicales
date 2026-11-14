@@ -125,30 +125,8 @@ public class AdminService implements AdminInterface{
     }
 
     @Override
-    public List<Consultation> getConsultationsFiltered(String statut, String date, String medecin) {
-        return consultationRepository.search(parseStatus(statut), parseDate(date), medecin);
-    }
-
-    private StatusConsultation parseStatus(String statut) {
-        if (statut == null || statut.isBlank()) {
-            return null;
-        }
-        try {
-            return StatusConsultation.valueOf(statut);
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
-    }
-
-    private LocalDate parseDate(String date) {
-        if (date == null || date.isBlank()) {
-            return null;
-        }
-        try {
-            return LocalDate.parse(date);
-        } catch (Exception e) {
-            return null;
-        }
+    public List<Consultation> getConsultationsFiltered(StatusConsultation statut, LocalDate date, String medecin) {
+        return consultationRepository.search(statut, date, medecin);
     }
 
 }

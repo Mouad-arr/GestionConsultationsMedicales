@@ -9,6 +9,8 @@ import our.ensaa.projet.entity.Consultation;
 import our.ensaa.projet.entity.Medecin;
 import our.ensaa.projet.entity.Patient;
 import our.ensaa.projet.entity.Sexe;
+import our.ensaa.projet.entity.StatusConsultation;
+import our.ensaa.projet.service.AdminInterface;
 import our.ensaa.projet.service.AdminService;
 
 import java.io.IOException;
@@ -18,7 +20,7 @@ import java.util.List;
 @WebServlet({"/admin", "/admin/medecins", "/admin/patients", "/admin/consultations", "/admin/logout"})
 public class AdminServlet extends HttpServlet {
 
-    private AdminService adminService;
+    private AdminInterface adminService;
 
     @Override
     public void init() {
@@ -233,8 +235,8 @@ public class AdminServlet extends HttpServlet {
     private void showConsultations(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String statut = request.getParameter("statut");
-        String date = request.getParameter("date");
+        StatusConsultation statut = parseStatus(request.getParameter("statut"));
+        LocalDate date = parseDate(request.getParameter("date"));
         String medecin = request.getParameter("medecin");
 
         List<Consultation> consultations = adminService.getConsultationsFiltered(statut, date, medecin);
@@ -265,6 +267,17 @@ public class AdminServlet extends HttpServlet {
         try {
             return LocalDate.parse(value.trim());
         } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private StatusConsultation parseStatus(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        try {
+            return StatusConsultation.valueOf(value.trim());
+        } catch (IllegalArgumentException e) {
             return null;
         }
     }

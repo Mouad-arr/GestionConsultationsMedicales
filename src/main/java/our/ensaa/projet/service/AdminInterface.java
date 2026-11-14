@@ -3,7 +3,9 @@ package our.ensaa.projet.service;
 import our.ensaa.projet.entity.Consultation;
 import our.ensaa.projet.entity.Medecin;
 import our.ensaa.projet.entity.Patient;
+import our.ensaa.projet.entity.StatusConsultation;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AdminInterface {
@@ -24,5 +26,5 @@ public interface AdminInterface {
 
     public List<Consultation> getAllConsultations() ;
     public List<Consultation> getConsultationsDuJour() ;
-    public List<Consultation> getConsultationsFiltered(String statut, String date, String medecin) ;
+    public List<Consultation> getConsultationsFiltered(StatusConsultation statut, LocalDate date, String medecin) ;
 }
