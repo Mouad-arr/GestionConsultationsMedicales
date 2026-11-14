@@ -19,11 +19,19 @@
         <main class="main-content">
 
             <!-- Header -->
-            <div class="mb-4">
-                <h1 class="page-title">Gestion des consultations</h1>
-                <p class="subtitle mb-0">
-                    Vue globale de toutes les consultations de la clinique.
-                </p>
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                <div>
+                    <h1 class="page-title">Gestion des consultations</h1>
+                    <p class="subtitle mb-0">
+                        Vue globale de toutes les consultations de la clinique.
+                    </p>
+                </div>
+
+                <a href="${ctx}/admin/consultations?action=new"
+                   class="btn btn-primary">
+                    <i class="fa-solid fa-plus me-2"></i>
+                    Nouvelle consultation
+                </a>
             </div>
 
             <!-- Statistics -->
@@ -68,7 +76,7 @@
                 <form class="row g-2 align-items-end mb-4" action="${ctx}/admin/consultations" method="get">
                     <div class="col-md-3">
                         <label class="form-label small text-muted mb-1">Statut</label>
-                        <select name="statut" class="form-select">
+                        <select name="statut" id="statutSelect" class="form-select">
                             <option value="">Tous les statuts</option>
                             <option value="Planifie" ${param.statut == 'Planifie' ? 'selected' : ''}>Planifiée</option>
                             <option value="TERMINEE" ${param.statut == 'TERMINEE' ? 'selected' : ''}>Terminée</option>
@@ -78,12 +86,12 @@
 
                     <div class="col-md-3">
                         <label class="form-label small text-muted mb-1">Date</label>
-                        <input type="date" name="date" value="${param.date}" class="form-control">
+                        <input type="date" id="dateInput" name="date" value="${param.date}" class="form-control">
                     </div>
 
                     <div class="col-md-3">
                         <label class="form-label small text-muted mb-1">Médecin</label>
-                        <input type="text" name="medecin" value="${param.medecin}"
+                        <input type="text" id="medecinInput" name="medecin" value="${param.medecin}"
                                class="form-control" placeholder="Nom du médecin...">
                     </div>
 
@@ -115,59 +123,8 @@
                         </tr>
                         </thead>
 
-                        <tbody>
-                        <c:forEach var="c" items="${consultations}">
-                            <tr>
-                                <td class="fw-semibold">#${c.id}</td>
-
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="patient-avatar">
-                                            <i class="fa-solid fa-user"></i>
-                                        </div>
-                                        <span class="fw-semibold">
-                                            <c:out value="${c.getPatient().getNom()} ${c.getPatient().getPrenom()}"/>
-                                        </span>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <c:out value="${c.getMedecin().getNom()} ${c.getMedecin().getPrenom()}"/>
-                                </td>
-
-                                <td>
-                                    <i class="fa-regular fa-calendar text-muted me-1"></i>
-                                    ${c.getDateConsultation().toLocalDate()}
-                                </td>
-
-                                <td>
-                                    <i class="fa-regular fa-clock text-muted me-1"></i>
-                                    ${c.getDateConsultation().toLocalTime()}
-                                </td>
-
-                                <td>
-                                    <c:out value="${c.getMotif()}"/>
-                                </td>
-
-                                <td>
-                                    <span class="badge bg-primary-subtle text-primary">
-                                        <c:out value="${c.getStatus().getLibelle()}"/>
-                                    </span>
-                                </td>
-                            </tr>
-                        </c:forEach>
-
-                        <c:if test="${empty consultations}">
-                            <tr>
-                                <td colspan="7" class="text-center py-5">
-                                    <div class="text-muted">
-                                        <i class="fa-regular fa-folder-open fs-1 mb-3"></i>
-                                        <p class="fw-semibold mb-1">Aucune consultation</p>
-                                        <small>Les consultations apparaîtront ici.</small>
-                                    </div>
-                                </td>
-                            </tr>
-                        </c:if>
+                        <tbody id="consultationsBody">
+                            <jsp:include page="partials/consultationsRows.jsp"/>
                         </tbody>
                     </table>
                 </div>
@@ -175,6 +132,19 @@
             </div>
 
         </main>
+
+        <script src="${ctx}/js/adminSearch.js"></script>
+        <script>
+            liveSearch({
+                endpoint: '${ctx}/admin/consultations/search',
+                tbodyId: 'consultationsBody',
+                inputs: [
+                    { id: 'statutSelect', param: 'statut' },
+                    { id: 'dateInput', param: 'date' },
+                    { id: 'medecinInput', param: 'medecin' }
+                ]
+            });
+        </script>
 
     </body>
 </html>

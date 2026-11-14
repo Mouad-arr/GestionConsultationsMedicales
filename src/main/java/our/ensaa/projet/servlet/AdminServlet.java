@@ -15,9 +15,12 @@ import our.ensaa.projet.service.AdminService;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
-@WebServlet({"/admin", "/admin/medecins", "/admin/patients", "/admin/consultations", "/admin/logout"})
+@WebServlet({"/admin", "/admin/medecins", "/admin/patients", "/admin/consultations", "/admin/logout",
+             "/admin/medecins/search", "/admin/patients/search", "/admin/consultations/search"})
 public class AdminServlet extends HttpServlet {
 
     private AdminInterface adminService;
@@ -39,6 +42,9 @@ public class AdminServlet extends HttpServlet {
             case "/admin/patients" -> showPatients(request, response);
             case "/admin/consultations" -> showConsultations(request, response);
             case "/admin/logout" -> response.sendRedirect(request.getContextPath() + "/login");
+            case "/admin/medecins/search" -> searchMedecins(request, response);
+            case "/admin/patients/search" -> searchPatients(request, response);
+            case "/admin/consultations/search" -> searchConsultations(request, response);
             default -> response.sendRedirect(request.getContextPath() + "/admin");
         }
     }
@@ -52,6 +58,7 @@ public class AdminServlet extends HttpServlet {
         switch (path) {
             case "/admin/medecins" -> saveMedecin(request, response);
             case "/admin/patients" -> savePatient(request, response);
+            case "/admin/consultations" -> saveConsultation(request, response);
             default -> response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
@@ -253,6 +260,13 @@ public class AdminServlet extends HttpServlet {
     private void showConsultations(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        if ("new".equals(request.getParameter("action"))) {
+            request.setAttribute("patients", adminService.getAllPatients());
+            request.setAttribute("medecins", adminService.getAllMedecins());
+            request.getRequestDispatcher("/adminView/consultationForm.jsp").forward(request, response);
+            return;
+        }
+
         StatusConsultation statut = parseStatus(request.getParameter("statut"));
         LocalDate date = parseDate(request.getParameter("date"));
         String medecin = request.getParameter("medecin");
@@ -261,6 +275,69 @@ public class AdminServlet extends HttpServlet {
 
         request.setAttribute("consultations", consultations);
         request.getRequestDispatcher("/adminView/consultations.jsp").forward(request, response);
+    }
+
+    // ---------------------------------------------------------------------
+    //  Dynamic search (AJAX — returns the <tbody> fragment)
+    // ---------------------------------------------------------------------
+
+    private void searchMedecins(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String search = request.getParameter("search");
+        String specialite = request.getParameter("specialite");
+        request.setAttribute("medecins", adminService.getMedecinsFiltered(search, specialite));
+        request.getRequestDispatcher("/adminView/partials/medecinsRows.jsp").forward(request, response);
+    }
+
+    private void searchPatients(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String search = request.getParameter("search");
+        List<Patient> patients = (search == null || search.isBlank())
+                ? adminService.getAllPatients()
+                : adminService.getPatientsFiltered(search);
+        request.setAttribute("patients", patients);
+        request.getRequestDispatcher("/adminView/partials/patientsRows.jsp").forward(request, response);
+    }
+
+    private void searchConsultations(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        StatusConsultation statut = parseStatus(request.getParameter("statut"));
+        LocalDate date = parseDate(request.getParameter("date"));
+        String medecin = request.getParameter("medecin");
+        request.setAttribute("consultations", adminService.getConsultationsFiltered(statut, date, medecin));
+        request.getRequestDispatcher("/adminView/partials/consultationsRows.jsp").forward(request, response);
+    }
+
+    private void saveConsultation(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        try {
+            Long patientId = parseLong(request.getParameter("patientId"));
+            Long medecinId = parseLong(request.getParameter("medecinId"));
+
+            if (patientId == null || medecinId == null) {
+                flashErrorAndRedirect(request, response, "/admin/consultations",
+                        "Veuillez sélectionner un patient et un médecin.");
+                return;
+            }
+
+            LocalDate date = parseDate(request.getParameter("date"));
+            if (date == null) {
+                flashErrorAndRedirect(request, response, "/admin/consultations",
+                        "Veuillez renseigner une date valide.");
+                return;
+            }
+
+            LocalTime heure = parseTime(request.getParameter("heure"));
+            LocalDateTime dateConsultation = LocalDateTime.of(date, heure);
+
+            String motif = request.getParameter("motif");
+
+            adminService.createConsultation(patientId, medecinId, dateConsultation, motif);
+            response.sendRedirect(request.getContextPath() + "/admin/consultations");
+        } catch (Exception e) {
+            flashErrorAndRedirect(request, response, "/admin/consultations",
+                    "Erreur lors de la création de la consultation.");
+        }
     }
 
     // ---------------------------------------------------------------------
@@ -297,6 +374,17 @@ public class AdminServlet extends HttpServlet {
             return StatusConsultation.valueOf(value.trim());
         } catch (IllegalArgumentException e) {
             return null;
+        }
+    }
+
+    private LocalTime parseTime(String value) {
+        if (value == null || value.isBlank()) {
+            return LocalTime.of(9, 0);
+        }
+        try {
+            return LocalTime.parse(value.trim());
+        } catch (Exception e) {
+            return LocalTime.of(9, 0);
         }
     }
 

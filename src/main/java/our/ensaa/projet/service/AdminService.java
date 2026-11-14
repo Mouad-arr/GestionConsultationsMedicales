@@ -15,6 +15,7 @@ import our.ensaa.projet.entity.Role;
 import our.ensaa.projet.entity.StatusConsultation;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -129,6 +130,18 @@ public class AdminService implements AdminInterface{
     @Override
     public List<Consultation> getConsultationsFiltered(StatusConsultation statut, LocalDate date, String medecin) {
         return consultationRepository.search(statut, date, medecin);
+    }
+
+    @Override
+    public void createConsultation(Long patientId, Long medecinId, LocalDateTime dateConsultation, String motif) {
+        Patient patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new IllegalArgumentException("Patient introuvable"));
+        Medecin medecin = medecinRepository.getMedecinById(medecinId)
+                .orElseThrow(() -> new IllegalArgumentException("Médecin introuvable"));
+
+        Consultation consultation = new Consultation(dateConsultation, null, patient, medecin);
+        consultation.setMotif(motif);
+        consultationRepository.save(consultation);
     }
 
 }

@@ -29,4 +29,6 @@ public interface ConsultationRepository {
 
     List<Consultation> search(StatusConsultation statut, LocalDate date, String medecin);
 
+    void save(Consultation consultation);
+
 }

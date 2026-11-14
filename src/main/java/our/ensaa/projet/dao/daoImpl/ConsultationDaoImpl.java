@@ -1,6 +1,7 @@
 package our.ensaa.projet.dao.daoImpl;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import our.ensaa.projet.dao.ConsultationRepository;
 import our.ensaa.projet.entity.Consultation;
@@ -131,6 +132,20 @@ public class ConsultationDaoImpl implements ConsultationRepository {
         }
 
         return query.getResultList();
+    }
+
+    @Override
+    public void save(Consultation consultation) {
+        EntityTransaction tx = entityManager.getTransaction();
+        try {
+            tx.begin();
+            entityManager.persist(consultation);
+            tx.commit();
+            entityManager.clear();
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw e;
+        }
     }
 
 }

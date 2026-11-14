@@ -6,6 +6,7 @@ import our.ensaa.projet.entity.Patient;
 import our.ensaa.projet.entity.StatusConsultation;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AdminInterface {
@@ -27,4 +28,5 @@ public interface AdminInterface {
     public List<Consultation> getAllConsultations() ;
     public List<Consultation> getConsultationsDuJour() ;
     public List<Consultation> getConsultationsFiltered(StatusConsultation statut, LocalDate date, String medecin) ;
+    public void createConsultation(Long patientId, Long medecinId, LocalDateTime dateConsultation, String motif) ;
 }
