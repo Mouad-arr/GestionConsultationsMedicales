@@ -18,6 +18,15 @@
 
         <main class="main-content">
 
+            <c:if test="${not empty sessionScope.flashError}">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                    <c:out value="${sessionScope.flashError}"/>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+                </div>
+                <c:remove var="flashError" scope="session"/>
+            </c:if>
+
             <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                 <div>
@@ -76,19 +85,17 @@
                 <form class="row g-2 align-items-end mb-4" action="${ctx}/admin/medecins" method="get">
                     <div class="col-md-4">
                         <label class="form-label small text-muted mb-1">Rechercher</label>
-                        <input type="text" name="search" value="${param.search}"
+                        <input type="text" id="searchInput" name="search" value="${param.search}"
                                class="form-control" placeholder="Nom du médecin...">
                     </div>
 
                     <div class="col-md-3">
                         <label class="form-label small text-muted mb-1">Spécialité</label>
-                        <select name="specialite" class="form-select">
+                        <select name="specialite" id="specialiteSelect" class="form-select">
                             <option value="">Toutes les spécialités</option>
-                            <!-- TODO: populate dynamically from the DB -->
-                            <option value="Cardiologie" ${param.specialite == 'Cardiologie' ? 'selected' : ''}>Cardiologie</option>
-                            <option value="Pédiatrie" ${param.specialite == 'Pédiatrie' ? 'selected' : ''}>Pédiatrie</option>
-                            <option value="Dermatologie" ${param.specialite == 'Dermatologie' ? 'selected' : ''}>Dermatologie</option>
-                            <option value="Généraliste" ${param.specialite == 'Généraliste' ? 'selected' : ''}>Généraliste</option>
+                            <c:forEach var="s" items="${specialites}">
+                                <option value="${s}" ${param.specialite == s ? 'selected' : ''}>${s}</option>
+                            </c:forEach>
                         </select>
                     </div>
 
@@ -120,70 +127,8 @@
                         </tr>
                         </thead>
 
-                        <tbody>
-                        <c:forEach var="m" items="${medecins}">
-                            <tr>
-                                <td class="fw-semibold">#${m.id}</td>
-
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="patient-avatar">
-                                            <i class="fa-solid fa-user-doctor"></i>
-                                        </div>
-                                        <span class="fw-semibold">
-                                            <c:out value="${m.getNom()} ${m.getPrenom()}"/>
-                                        </span>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <span class="badge bg-primary-subtle text-primary">
-                                        <c:out value="${m.getSpecialite()}"/>
-                                    </span>
-                                </td>
-
-                                <td>
-                                    <c:out value="${m.getNumeroOrdre()}"/>
-                                </td>
-
-                                <td>
-                                    <c:out value="${m.getEmail()}"/>
-                                </td>
-
-                                <td>
-                                    <c:out value="${m.getTelephone()}"/>
-                                </td>
-
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <a href="${ctx}/admin/medecins?action=edit&id=${m.id}"
-                                           class="btn btn-sm btn-outline-primary">
-                                            <i class="fa-solid fa-pen-to-square me-1"></i>
-                                            Modifier
-                                        </a>
-
-                                        <a href="${ctx}/admin/medecins?action=delete&id=${m.id}"
-                                           class="btn btn-sm btn-outline-danger"
-                                           onclick="return confirm('Voulez-vous vraiment supprimer ce médecin ?');">
-                                            <i class="fa-solid fa-trash-can me-1"></i>
-                                            Supprimer
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </c:forEach>
-
-                        <c:if test="${empty medecins}">
-                            <tr>
-                                <td colspan="7" class="text-center py-5">
-                                    <div class="text-muted">
-                                        <i class="fa-solid fa-user-doctor fs-1 mb-3"></i>
-                                        <p class="fw-semibold mb-1">Aucun médecin enregistré</p>
-                                        <small>Les médecins apparaîtront ici.</small>
-                                    </div>
-                                </td>
-                            </tr>
-                        </c:if>
+                        <tbody id="medecinsBody">
+                            <jsp:include page="partials/medecinsRows.jsp"/>
                         </tbody>
                     </table>
                 </div>
@@ -191,6 +136,18 @@
             </div>
 
         </main>
+
+        <script src="${ctx}/js/adminSearch.js"></script>
+        <script>
+            liveSearch({
+                endpoint: '${ctx}/admin/medecins/search',
+                tbodyId: 'medecinsBody',
+                inputs: [
+                    { id: 'searchInput', param: 'search' },
+                    { id: 'specialiteSelect', param: 'specialite' }
+                ]
+            });
+        </script>
 
     </body>
 </html>
