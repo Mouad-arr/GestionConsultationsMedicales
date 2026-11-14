@@ -84,11 +84,9 @@
                         <label class="form-label small text-muted mb-1">Spécialité</label>
                         <select name="specialite" class="form-select">
                             <option value="">Toutes les spécialités</option>
-                            <!-- TODO: populate dynamically from the DB -->
-                            <option value="Cardiologie" ${param.specialite == 'Cardiologie' ? 'selected' : ''}>Cardiologie</option>
-                            <option value="Pédiatrie" ${param.specialite == 'Pédiatrie' ? 'selected' : ''}>Pédiatrie</option>
-                            <option value="Dermatologie" ${param.specialite == 'Dermatologie' ? 'selected' : ''}>Dermatologie</option>
-                            <option value="Généraliste" ${param.specialite == 'Généraliste' ? 'selected' : ''}>Généraliste</option>
+                            <c:forEach var="s" items="${specialites}">
+                                <option value="${s}" ${param.specialite == s ? 'selected' : ''}>${s}</option>
+                            </c:forEach>
                         </select>
                     </div>
 
