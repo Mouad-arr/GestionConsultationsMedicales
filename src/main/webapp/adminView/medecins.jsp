@@ -18,6 +18,15 @@
 
         <main class="main-content">
 
+            <c:if test="${not empty sessionScope.flashError}">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                    <c:out value="${sessionScope.flashError}"/>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+                </div>
+                <c:remove var="flashError" scope="session"/>
+            </c:if>
+
             <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                 <div>

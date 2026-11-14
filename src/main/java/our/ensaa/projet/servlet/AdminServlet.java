@@ -111,10 +111,15 @@ public class AdminServlet extends HttpServlet {
     private void deleteMedecin(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         Long id = parseLong(request.getParameter("id"));
-        if (id != null) {
-            adminService.deleteMedecin(id);
+        try {
+            if (id != null) {
+                adminService.deleteMedecin(id);
+            }
+            response.sendRedirect(request.getContextPath() + "/admin/medecins");
+        } catch (Exception e) {
+            flashErrorAndRedirect(request, response, "/admin/medecins",
+                    "Impossible de supprimer ce médecin.");
         }
-        response.sendRedirect(request.getContextPath() + "/admin/medecins");
     }
 
     private void saveMedecin(HttpServletRequest request, HttpServletResponse response)
@@ -122,14 +127,18 @@ public class AdminServlet extends HttpServlet {
         Medecin medecin = buildMedecinFromRequest(request);
 
         Long id = parseLong(request.getParameter("id"));
-        if (id == null) {
-            adminService.saveMedecin(medecin);
-        } else {
-            medecin.setId(id);
-            adminService.updateMedecin(medecin);
+        try {
+            if (id == null) {
+                adminService.saveMedecin(medecin);
+            } else {
+                medecin.setId(id);
+                adminService.updateMedecin(medecin);
+            }
+            response.sendRedirect(request.getContextPath() + "/admin/medecins");
+        } catch (Exception e) {
+            flashErrorAndRedirect(request, response, "/admin/medecins",
+                    "Erreur d'enregistrement : email ou numéro d'ordre déjà utilisé.");
         }
-
-        response.sendRedirect(request.getContextPath() + "/admin/medecins");
     }
 
     private Medecin buildMedecinFromRequest(HttpServletRequest request) {
@@ -184,10 +193,15 @@ public class AdminServlet extends HttpServlet {
     private void deletePatient(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         Long id = parseLong(request.getParameter("id"));
-        if (id != null) {
-            adminService.deletePatient(id);
+        try {
+            if (id != null) {
+                adminService.deletePatient(id);
+            }
+            response.sendRedirect(request.getContextPath() + "/admin/patients");
+        } catch (Exception e) {
+            flashErrorAndRedirect(request, response, "/admin/patients",
+                    "Impossible de supprimer ce patient.");
         }
-        response.sendRedirect(request.getContextPath() + "/admin/patients");
     }
 
     private void savePatient(HttpServletRequest request, HttpServletResponse response)
@@ -195,14 +209,18 @@ public class AdminServlet extends HttpServlet {
         Patient patient = buildPatientFromRequest(request);
 
         Long id = parseLong(request.getParameter("id"));
-        if (id == null) {
-            adminService.savePatient(patient);
-        } else {
-            patient.setId(id);
-            adminService.updatePatient(patient);
+        try {
+            if (id == null) {
+                adminService.savePatient(patient);
+            } else {
+                patient.setId(id);
+                adminService.updatePatient(patient);
+            }
+            response.sendRedirect(request.getContextPath() + "/admin/patients");
+        } catch (Exception e) {
+            flashErrorAndRedirect(request, response, "/admin/patients",
+                    "Erreur d'enregistrement : email, CIN ou numéro de dossier déjà utilisé.");
         }
-
-        response.sendRedirect(request.getContextPath() + "/admin/patients");
     }
 
     private Patient buildPatientFromRequest(HttpServletRequest request) {
@@ -280,6 +298,12 @@ public class AdminServlet extends HttpServlet {
         } catch (IllegalArgumentException e) {
             return null;
         }
+    }
+
+    private void flashErrorAndRedirect(HttpServletRequest request, HttpServletResponse response,
+                                       String path, String message) throws IOException {
+        request.getSession().setAttribute("flashError", message);
+        response.sendRedirect(request.getContextPath() + path);
     }
 
 }

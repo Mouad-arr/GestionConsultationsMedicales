@@ -30,7 +30,7 @@ VALUES ('Mohammed', 'Laadimi', 'admin@medicare.com', '0697779120', '2005-07-15',
 INSERT INTO `Medecin` (nom, prenom, email, telephone, dateNaissance, role, motDePasse, specialite, numeroOrdre)
 VALUES
 ('Omar',  'Laadimi', 'o.laadimi@medicare.com',  '0611111111', '1980-05-20', 'MEDECIN', 'med123', 'Cardiologie', 'ORD-001'),
-('El Amrani', 'Salma',  's.elamrani@medicare.com', '0622222222', '1988-09-10', 'MEDECIN', 'med123', 'Pédiatrie',   'ORD-002');
+('El Amrani', 'Salma',  's.elamrani@medicare.com', '0622222222', '1988-09-10', 'MEDECIN', 'med123', 'Donteste',   'ORD-002');
 
 -- ---------------------------------------------------------------------
 -- Patients

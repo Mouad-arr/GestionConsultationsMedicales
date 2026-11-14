@@ -3,6 +3,7 @@ package our.ensaa.projet.dao.daoImpl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import our.ensaa.projet.dao.PatientRepository;
+import our.ensaa.projet.entity.Consultation;
 import our.ensaa.projet.entity.Patient;
 import our.ensaa.projet.util.JpaUtil;
 
@@ -78,6 +79,14 @@ public class PatientDaoImpl implements PatientRepository {
             tx.begin();
             Patient patient = entityManager.find(Patient.class, id);
             if (patient != null) {
+                // Delete dependent consultations first (cascades to diagnostic + prescriptions).
+                List<Consultation> consultations = entityManager
+                        .createQuery("SELECT c FROM Consultation c WHERE c.patient.id = :id", Consultation.class)
+                        .setParameter("id", id)
+                        .getResultList();
+                for (Consultation consultation : consultations) {
+                    entityManager.remove(consultation);
+                }
                 entityManager.remove(patient);
             }
             tx.commit();

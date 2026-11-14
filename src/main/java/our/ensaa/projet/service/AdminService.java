@@ -67,6 +67,7 @@ public class AdminService implements AdminInterface{
 
     @Override
     public void updateMedecin(Medecin medecin) {
+        medecin.setRole(Role.MEDECIN);
         medecinRepository.update(medecin);
     }
 
@@ -102,6 +103,7 @@ public class AdminService implements AdminInterface{
 
     @Override
     public void updatePatient(Patient patient) {
+        patient.setRole(Role.PATIENT);
         patientRepository.update(patient);
     }
 
