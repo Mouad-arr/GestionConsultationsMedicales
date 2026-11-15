@@ -649,3 +649,54 @@ body {
         padding: 20px 12px;
     }
 }
+
+
+.prescription-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.prescription-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+}
+
+.prescription-medicine {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.prescription-detail {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 12px;
+    height: 100%;
+}
+
+.prescription-detail small {
+    display: block;
+    color: #64748b;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+}
+
+.prescription-detail p {
+    color: #334155;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+.empty-medical-state {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+}
+
+.empty-icon {
+    font-size: 2.5rem;
+    color: #94a3b8;
+}

@@ -46,9 +46,18 @@
                     Informations générales
                 </h2>
 
-                <span class="badge bg-primary-subtle text-primary px-3 py-2">
-                    <c:out value="${consultation.status}"/>
-                </span>
+                <c:if test="${consultation.status=='TERMINEE'}">
+                    <i class="fa-solid fa-check-circle me-1"></i>
+                    <span class="badge bg-success-subtle text-success">
+                                        <c:out value="${consultation.status}"/>
+                                    </span>
+                </c:if>
+                <c:if test="${consultation.status=='ANNULEE'}">
+                                    <span class="badge bg-danger-subtle text-danger">
+                                        <i class="fa-solid fa-ban me-1"></i>
+                                        <c:out value="${consultation.status}"/>
+                                    </span>
+                </c:if>
 
             </div>
 
@@ -137,9 +146,10 @@
                 Diagnostic et prescription
             </h2>
 
-            <c:choose>
 
-                <c:when test="${consultation.getDiagnostic() != null}">
+            <c:choose>
+                <%-- Diagnostic disponible --%>
+                <c:when test="${consultation.diagnostic != null}">
 
                     <!-- Diagnostic -->
                     <div class="medical-section mb-4">
@@ -148,59 +158,102 @@
                             <div class="detail-icon icon-blue">
                                 <i class="fa-solid fa-microscope"></i>
                             </div>
-
-                            <h3 class="section-title mb-0">
-                                Diagnostic
-                            </h3>
+                            <h3 class="section-title mb-0">Diagnostic</h3>
                         </div>
 
                         <div class="medical-description">
                             <p class="mb-0">
-                                <c:out value="${consultation.getDiagnostic().getDescription()}"/>
+                                <c:out value="${consultation.diagnostic.description}"/>
                             </p>
                         </div>
 
                     </div>
 
-                    <!-- Prescription -->
+                    <!-- Prescriptions -->
                     <div class="medical-section">
 
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <div class="detail-icon icon-green">
                                 <i class="fa-solid fa-prescription"></i>
                             </div>
-
-                            <h3 class="section-title mb-0">
-                                Prescription
-                            </h3>
+                            <h3 class="section-title mb-0">Prescriptions</h3>
                         </div>
 
                         <c:choose>
+                            <c:when test="${not empty consultation.diagnostic.prescriptions}">
 
-                            <c:when test="${consultation.getDiagnostic().getPrescriptions() != null}">
-                                <c:forEach  var="prescription" items="${consultation.getDiagnostic().getPrescriptions()}">
-                                    <div class="medical-description prescription-box mb-3">
-                                        <p class="mb-0">
-                                            <c:out value="${prescription.getDescription()}"/>
-                                        </p>
-                                    </div>
-                                </c:forEach>
+                                <div class="row g-3">
+                                    <c:forEach var="prescription"
+                                               items="${consultation.diagnostic.prescriptions}"
+                                               varStatus="status">
+
+                                        <div class="col-12">
+                                            <div class="prescription-card">
+
+                                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                        <span class="badge bg-success-subtle text-success">
+                                            <i class="fa-solid fa-pills me-1"></i>
+                                            Prescription ${status.index + 1}
+                                        </span>
+                                                </div>
+
+                                                <h5 class="prescription-medicine mb-3">
+                                                    <i class="fa-solid fa-capsules text-success me-2"></i>
+                                                    <c:out value="${prescription.medicament}"/>
+                                                </h5>
+
+                                                <div class="row g-3">
+
+                                                    <div class="col-md-4">
+                                                        <div class="prescription-detail">
+                                                            <small>Posologie</small>
+                                                            <p class="mb-0">
+                                                                <c:out value="${prescription.posologie}"/>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="prescription-detail">
+                                                            <small>Durée</small>
+                                                            <p class="mb-0">
+                                                                <c:out value="${prescription.dureeJours}"/> jours
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="prescription-detail">
+                                                            <small>Instructions</small>
+                                                            <p class="mb-0">
+                                                                <c:out value="${prescription.instructions}"/>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </c:forEach>
+                                </div>
+
                             </c:when>
-                            <c:otherwise>
 
+                            <c:otherwise>
                                 <div class="alert alert-light border mb-0">
                                     <i class="fa-solid fa-info-circle text-primary me-2"></i>
                                     Aucune prescription disponible pour ce diagnostic.
                                 </div>
-
                             </c:otherwise>
-
                         </c:choose>
 
                     </div>
 
                 </c:when>
 
+                <%-- Aucun diagnostic --%>
                 <c:otherwise>
 
                     <div class="empty-medical-state text-center py-5">
@@ -209,9 +262,7 @@
                             <i class="fa-solid fa-file-circle-question"></i>
                         </div>
 
-                        <h5 class="fw-semibold">
-                            Aucun diagnostic disponible
-                        </h5>
+                        <h5 class="fw-semibold">Aucun diagnostic disponible</h5>
 
                         <p class="text-muted mb-0">
                             Aucun diagnostic n'a encore été établi pour cette consultation.
@@ -220,8 +271,8 @@
                     </div>
 
                 </c:otherwise>
-
             </c:choose>
+
 
         </div>
 

@@ -1,6 +1,8 @@
 package our.ensaa.projet.dao;
 
+import our.ensaa.projet.entity.Diagnostic;
+
 public interface DiagnosticRepository {
 
-    public void saveDiagnostic(Long consultationId, String description);
+    void saveDiagnostic(Long consultationId, Diagnostic diagnostic);
 }
