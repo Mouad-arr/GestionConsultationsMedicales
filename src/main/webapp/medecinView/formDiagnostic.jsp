@@ -40,7 +40,7 @@
                     <small class="text-muted">Consultation concernée</small>
 
                     <h5 class="fw-bold mb-0">
-                        Consultation #${consultation.getId()}
+                        Consultation #${ConsultationId}
                     </h5>
                 </div>
 
@@ -66,7 +66,7 @@
 
                 <input type="hidden"
                        name="consultationId"
-                       value="${consultation.getId()}"/>
+                       value="${ConsultationId}"/>
 
                 <!-- Diagnostic description -->
                 <div class="mb-4">
@@ -93,8 +93,7 @@
                 <hr class="my-4">
 
                 <!-- Prescription -->
-               <!-- <div class="mb-4">
-
+                <div class="mb-4">
                     <h3 class="section-title">
                         <i class="fa-solid fa-prescription text-success me-2"></i>
                         Prescription médicale
@@ -102,83 +101,100 @@
                     </h3>
 
                     <p class="subtitle">
-                        Complétez les informations suivantes si une prescription est nécessaire.
+                        Ajoutez un ou plusieurs médicaments si une prescription est nécessaire.
                     </p>
-
                 </div>
 
-                <div class="row g-3">
-                -->
-                    <!-- Medicament -->
-              <!--      <div class="col-md-6">
-
-                        <label for="medicament" class="form-label fw-semibold">
-                            <i class="fa-solid fa-pills text-muted me-1"></i>
-                            Médicament
-                        </label>
-
-                        <input
-                                type="text"
-                                class="form-control medical-input"
-                                id="medicament"
-                                name="medicament"
-                                placeholder="Nom du médicament">
-
-                    </div>
-                    -->
-                    <!-- Posologie -->
-               <!--     <div class="col-md-6">
-
-                        <label for="posologie" class="form-label fw-semibold">
-                            <i class="fa-solid fa-prescription-bottle-medical text-muted me-1"></i>
-                            Posologie
-                        </label>
-
-                        <input
-                                type="text"
-                                class="form-control medical-input"
-                                id="posologie"
-                                name="posologie"
-                                placeholder="Ex : 1 comprimé, 2 fois par jour">
-
-                    </div>
-
-                  -->  <!-- Duree -->
-               <!--    <div class="col-md-6">
-
-                        <label for="duree" class="form-label fw-semibold">
-                            <i class="fa-solid fa-calendar-days text-muted me-1"></i>
-                            Durée du traitement
-                        </label>
-
-                        <input
-                                type="text"
-                                class="form-control medical-input"
-                                id="duree"
-                                name="duree"
-                                placeholder="Ex : 7 jours">
-
-                    </div>
-
-                  -->  <!-- Instructions -->
-                 <!--   <div class="col-md-6">
-
-                        <label for="instructions" class="form-label fw-semibold">
-                            <i class="fa-solid fa-clipboard-list text-muted me-1"></i>
-                            Instructions
-                        </label>
-
-                        <input
-                                type="text"
-                                class="form-control medical-input"
-                                id="instructions"
-                                name="instructions"
-                                placeholder="Instructions complémentaires">
-
-                    </div>
-
+                <!-- Liste des prescriptions -->
+                <div id="prescriptionsContainer" class="d-flex flex-column gap-3">
                 </div>
-               -->
+
+                <!-- Bouton ajouter -->
+                <div class="mt-3">
+                    <button type="button"
+                            class="btn btn-outline-success"
+                            onclick="ajouterPrescription()">
+                        <i class="fa-solid fa-plus me-2"></i>
+                        Ajouter une prescription
+                    </button>
+                </div>
+
+                <!-- Template d'une prescription -->
+                <template id="prescriptionTemplate">
+                    <div class="card border-0 shadow-sm prescription-item">
+                        <div class="card-header bg-light d-flex justify-content-between align-items-center py-3">
+                            <span class="fw-semibold text-success">
+                                <i class="fa-solid fa-pills me-2"></i>
+                                Prescription <span class="prescription-number"></span>
+                            </span>
+
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-danger"
+                                    onclick="supprimerPrescription(this)">
+                                <i class="fa-solid fa-trash me-1"></i>
+                                Supprimer
+                            </button>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row g-3">
+
+                                <!-- Médicament -->
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">
+                                        <i class="fa-solid fa-capsules text-muted me-1"></i>
+                                        Médicament
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control medical-input"
+                                           data-field="medicament"
+                                           placeholder="Nom du médicament">
+                                </div>
+
+                                <!-- Posologie -->
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">
+                                        <i class="fa-solid fa-prescription-bottle-medical text-muted me-1"></i>
+                                        Posologie
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control medical-input"
+                                           data-field="posologie"
+                                           placeholder="Ex : 1 comprimé, 2 fois par jour">
+                                </div>
+
+                                <!-- Durée -->
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">
+                                        <i class="fa-solid fa-calendar-days text-muted me-1"></i>
+                                        Durée du traitement
+                                    </label>
+
+                                    <input type="number"
+                                           class="form-control medical-input"
+                                           data-field="duree"
+                                           placeholder="Ex : 7 jours">
+                                </div>
+
+                                <!-- Instructions -->
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">
+                                        <i class="fa-solid fa-clipboard-list text-muted me-1"></i>
+                                        Instructions
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control medical-input"
+                                           data-field="instructions"
+                                           placeholder="Instructions complémentaires">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </template>
 
                 <!-- Actions -->
                 <div class="d-flex justify-content-end gap-2 mt-5 flex-wrap">
@@ -208,3 +224,52 @@
 
     </body>
 </html>
+<script>
+    let prescriptionIndex = 0;
+
+    function ajouterPrescription() {
+
+        const template = document.getElementById("prescriptionTemplate");
+        const container = document.getElementById("prescriptionsContainer");
+
+        const clone = template.content.cloneNode(true);
+
+        const item = clone.querySelector(".prescription-item");
+
+
+        item.querySelector(".prescription-number").textContent =
+            container.children.length + 1;
+
+        item.querySelectorAll("[data-field]").forEach(input => {
+            const field = input.dataset.field;
+
+            const fieldName = "prescription[" + prescriptionIndex + "]." + field;
+
+            input.setAttribute("name", fieldName);
+
+            console.log("Name:", input.getAttribute("name"));
+        });
+
+        prescriptionIndex++;
+
+        container.appendChild(clone);
+    }
+
+    function supprimerPrescription(button) {
+
+        button.closest(".prescription-item").remove();
+
+        document.querySelectorAll(".prescription-item").forEach((item, index) => {
+
+            item.querySelector(".prescription-number").textContent = index + 1;
+
+            item.querySelectorAll("[data-field]").forEach(input => {
+                input.setAttribute("name","prescription["+index+"]."+input.dataset.field);
+            });
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        ajouterPrescription();
+    });
+</script>

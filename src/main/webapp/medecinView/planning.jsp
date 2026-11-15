@@ -23,7 +23,7 @@
             <h1 class="page-title">Mon planning</h1>
             <p class="subtitle">
                 Bonjour Dr
-                <c:out value="${medicine.getNom()} ${medicine.getPrenom()}"/>.
+                <c:out value="${medicin.getNom()} ${medicin.getPrenom()}"/>.
                 Retrouvez ici vos prochaines consultations.
             </p>
         </div>
@@ -161,8 +161,8 @@
                                     <i class="fa-solid fa-file-medical me-1"></i>
                                     Établir le diagnostic
                                 </a>
-                                <a href="${ctx}/medecin/diagnostic?ConsultationId=${c.id}&annuler=${true}"
-                                   class="btn btn-sm btn-primary">
+                                <a href="${ctx}/medecin/diagnostic?ConsultationId=${c.id}&action=annuler"
+                                   class="btn btn-sm btn-secondary">
                                     <i class="fa-solid fa-file-medical me-1"></i>
                                     Annuler
                                 </a>

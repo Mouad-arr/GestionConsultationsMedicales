@@ -189,9 +189,18 @@
                                 <td>${c.getDateConsultation().toLocalTime()}</td>
 
                                 <td>
-                                    <span class="badge bg-success-subtle text-success">
-                                        <c:out value="${c.getStatus()}"/>
+                                    <c:if test="${c.status=='TERMINEE'}">
+                                        <i class="fa-solid fa-check-circle me-1"></i>
+                                        <span class="badge bg-success-subtle text-success">
+                                        <c:out value="${c.status}"/>
                                     </span>
+                                    </c:if>
+                                    <c:if test="${c.status=='ANNULEE'}">
+                                    <span class="badge bg-danger-subtle text-danger">
+                                        <i class="fa-solid fa-ban me-1"></i>
+                                        <c:out value="${c.status}"/>
+                                    </span>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>

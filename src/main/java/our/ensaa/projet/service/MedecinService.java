@@ -74,7 +74,7 @@ public class MedecinService implements MedcinTraitement {
     }
 
     @Override
-    public void updateDiagnostic(Long consultationId, String diagnostic) {
+    public void updateDiagnostic(Long consultationId, Diagnostic diagnostic) {
         if(consultationId == null || diagnostic == null) {
             throw new IllegalArgumentException("consultationId and diagnostic cannot be null");
         }
