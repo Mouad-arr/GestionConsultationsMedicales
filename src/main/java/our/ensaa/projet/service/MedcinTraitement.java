@@ -9,12 +9,13 @@ import java.util.List;
 
 public interface MedcinTraitement {
 
-    public List<Consultation> getHistoriqueConsultationsByMedcinId(Long medcinId);
-    public List<Consultation> getUpcomingConsultationsByMedcinId(Long medcinId);
-    public Medecin getInfoMedicinById(Long medecinId);
-    public List<Consultation> getLesTroisPremiersUpcomingConsultationsByMedecinId(Long medecinId);
-    public List<Consultation> getLesTroisDerniersConsultationsTerminerByMedecinId(Long medecinId);
-    public Consultation getConsultationById(Long consultationId,Long medcinId);
-    public void updateDiagnostic(Long consultationId, Diagnostic diagnostic);
-    public void updateConsultation(Long consultationId, StatusConsultation status);
+    List<Consultation> getHistoriqueConsultationsByMedcinId(Long medcinId);
+    List<Consultation> getUpcomingConsultationsByMedcinId(Long medcinId);
+    Medecin getInfoMedicinById(Long medecinId);
+    List<Consultation> getLesTroisPremiersUpcomingConsultationsByMedecinId(Long medecinId);
+    List<Consultation> getLesTroisDerniersConsultationsTerminerByMedecinId(Long medecinId);
+    Consultation getConsultationById(Long consultationId,Long medcinId);
+    void updateDiagnostic(Long consultationId, Diagnostic diagnostic);
+    void updateConsultation(Long consultationId, StatusConsultation status);
+    Medecin getMedecinByEmail(String email);
 }

@@ -27,6 +27,13 @@ public class Admin extends Person {
         this.motDePasse = motDePasse;
     }
 
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
+    }
+
 
     public LocalDate getDateCreation() {
         return dateCreation;

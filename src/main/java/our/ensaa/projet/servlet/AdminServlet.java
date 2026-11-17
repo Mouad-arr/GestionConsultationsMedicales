@@ -5,11 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import our.ensaa.projet.entity.Consultation;
-import our.ensaa.projet.entity.Medecin;
-import our.ensaa.projet.entity.Patient;
-import our.ensaa.projet.entity.Sexe;
-import our.ensaa.projet.entity.StatusConsultation;
+import our.ensaa.projet.entity.*;
 import our.ensaa.projet.service.AdminInterface;
 import our.ensaa.projet.service.AdminService;
 
@@ -34,6 +30,12 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Admin admin = (Admin) request.getSession(false).getAttribute("admin");
+        if(admin == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
         String path = request.getServletPath();
 
         switch (path) {
@@ -41,10 +43,13 @@ public class AdminServlet extends HttpServlet {
             case "/admin/medecins" -> showMedecins(request, response);
             case "/admin/patients" -> showPatients(request, response);
             case "/admin/consultations" -> showConsultations(request, response);
-            case "/admin/logout" -> response.sendRedirect(request.getContextPath() + "/login");
             case "/admin/medecins/search" -> searchMedecins(request, response);
             case "/admin/patients/search" -> searchPatients(request, response);
             case "/admin/consultations/search" -> searchConsultations(request, response);
+            case "/admin/logout" -> {
+                request.getSession().invalidate();
+                response.sendRedirect(request.getContextPath() + "/login");
+            }
             default -> response.sendRedirect(request.getContextPath() + "/admin");
         }
     }
@@ -53,6 +58,11 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Admin admin = (Admin) request.getSession(false).getAttribute("admin");
+        if(admin == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
         String path = request.getServletPath();
 
         switch (path) {

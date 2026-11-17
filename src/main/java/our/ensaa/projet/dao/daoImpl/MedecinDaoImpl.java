@@ -117,5 +117,16 @@ public class MedecinDaoImpl implements MedecinRepository {
             throw e;
         }
     }
+    @Override
+    public Medecin getMedecinByEmail(String email) {
+        String jpql = "SELECT m FROM Medecin m WHERE m.email = :email";
+        try {
+            return entityManager.createQuery(jpql, Medecin.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
 }

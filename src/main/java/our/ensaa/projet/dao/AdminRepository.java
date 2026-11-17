@@ -12,5 +12,6 @@ public interface AdminRepository {
      * check once authentication is implemented properly.
      */
     Optional<Admin> findByEmailAndPassword(String email, String motDePasse);
+    Admin getAdminByEmail(String email);
 
 }

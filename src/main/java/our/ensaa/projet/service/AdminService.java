@@ -8,11 +8,7 @@ import our.ensaa.projet.dao.daoImpl.AdminDaoImpl;
 import our.ensaa.projet.dao.daoImpl.ConsultationDaoImpl;
 import our.ensaa.projet.dao.daoImpl.MedecinDaoImpl;
 import our.ensaa.projet.dao.daoImpl.PatientDaoImpl;
-import our.ensaa.projet.entity.Consultation;
-import our.ensaa.projet.entity.Medecin;
-import our.ensaa.projet.entity.Patient;
-import our.ensaa.projet.entity.Role;
-import our.ensaa.projet.entity.StatusConsultation;
+import our.ensaa.projet.entity.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -142,6 +138,10 @@ public class AdminService implements AdminInterface{
         Consultation consultation = new Consultation(dateConsultation, null, patient, medecin);
         consultation.setMotif(motif);
         consultationRepository.save(consultation);
+    }
+    @Override
+    public Admin getAdminByEmail(String email) {
+        return adminRepository.getAdminByEmail(email);
     }
 
 }

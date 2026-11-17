@@ -29,8 +29,13 @@ public class MedecinServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
 
+        Medecin medecin = (Medecin) request.getSession(false).getAttribute("medecin");
+        if(medecin == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
         String path = request.getServletPath();
-        Long medecinId = 1L;
+        Long medecinId = medecin.getId();
 
 
         if ("annuler".equals(request.getParameter("action"))) {
@@ -50,11 +55,21 @@ public class MedecinServlet extends HttpServlet {
 
             case "/medecin/diagnostic" -> getDiagnosticForm(request,response);
 
+            case "/medecin/logout" -> {
+                request.getSession().invalidate();
+                response.sendRedirect(request.getContextPath() + "/login");
+            }
+
             default -> response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Medecin medecin = (Medecin) request.getSession(false).getAttribute("medecin");
+        if(medecin == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
         String path = request.getServletPath();
         switch(path){
             case "/medecin/diagnostic" -> updateDiagnostic(request,response);
