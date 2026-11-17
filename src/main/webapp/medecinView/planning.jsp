@@ -161,7 +161,7 @@
                                     <i class="fa-solid fa-file-medical me-1"></i>
                                     Établir le diagnostic
                                 </a>
-                                <a href="${ctx}/medecin/diagnostic?ConsultationId=${c.id}&action=annuler"
+                                <a onclick="return confirm('Etes-vous sûr de vouloir annuler ce rendez-vous ?')" href="${ctx}/medecin/diagnostic?ConsultationId=${c.id}&action=annuler"
                                    class="btn btn-sm btn-secondary">
                                     <i class="fa-solid fa-file-medical me-1"></i>
                                     Annuler
