@@ -33,4 +33,16 @@ public class AdminDaoImpl implements AdminRepository {
         }
     }
 
+    @Override
+    public Admin getAdminByEmail(String email) {
+        String jpql = "SELECT a FROM Admin a WHERE a.email = :email";
+        try {
+            return entityManager.createQuery(jpql, Admin.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
 }

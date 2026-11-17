@@ -46,7 +46,7 @@
     </div>
 
     <div class="sidebar-bottom">
-        <a href="${ctx}/admin/logout" class="sidebar-link logout">
+        <a onclick="return confirm('Voulez-vous vraiment vous déconnecter ?')" href="${ctx}/admin/logout" class="sidebar-link logout">
             <i class="fa-solid fa-right-from-bracket"></i>
             <span>Déconnexion</span>
         </a>

@@ -1,32 +1,31 @@
 package our.ensaa.projet.service;
 
-import our.ensaa.projet.entity.Consultation;
-import our.ensaa.projet.entity.Medecin;
-import our.ensaa.projet.entity.Patient;
-import our.ensaa.projet.entity.StatusConsultation;
+import our.ensaa.projet.entity.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AdminInterface {
-    public List<Medecin> getAllMedecins() ;
-    public List<Medecin> getMedecinsFiltered(String search, String specialite) ;
-    public Medecin getMedecinById(Long id) ;
-    public List<String> getAllSpecialites() ;
-    public void saveMedecin(Medecin medecin) ;
-    public void updateMedecin(Medecin medecin) ;
-    public void deleteMedecin(Long id) ;
+    List<Medecin> getAllMedecins() ;
+    List<Medecin> getMedecinsFiltered(String search, String specialite) ;
+    Medecin getMedecinById(Long id) ;
+    List<String> getAllSpecialites() ;
+    void saveMedecin(Medecin medecin) ;
+    void updateMedecin(Medecin medecin) ;
+    void deleteMedecin(Long id) ;
 
-    public List<Patient> getAllPatients() ;
-    public List<Patient> getPatientsFiltered(String search) ;
-    public Patient getPatientById(Long id) ;
-    public void savePatient(Patient patient) ;
-    public void updatePatient(Patient patient) ;
-    public void deletePatient(Long id) ;
+    List<Patient> getAllPatients() ;
+    List<Patient> getPatientsFiltered(String search) ;
+    Patient getPatientById(Long id) ;
+    void savePatient(Patient patient) ;
+    void updatePatient(Patient patient) ;
+    void deletePatient(Long id) ;
 
-    public List<Consultation> getAllConsultations() ;
-    public List<Consultation> getConsultationsDuJour() ;
-    public List<Consultation> getConsultationsFiltered(StatusConsultation statut, LocalDate date, String medecin) ;
-    public void createConsultation(Long patientId, Long medecinId, LocalDateTime dateConsultation, String motif) ;
+    List<Consultation> getAllConsultations() ;
+    List<Consultation> getConsultationsDuJour() ;
+    List<Consultation> getConsultationsFiltered(StatusConsultation statut, LocalDate date, String medecin) ;
+    void createConsultation(Long patientId, Long medecinId, LocalDateTime dateConsultation, String motif) ;
+
+    Admin getAdminByEmail(String email);
 }

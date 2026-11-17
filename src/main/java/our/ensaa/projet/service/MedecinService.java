@@ -94,4 +94,12 @@ public class MedecinService implements MedcinTraitement {
         }
         consultationRepository.updateConsultation(id, statusConsultation);
     }
+
+    @Override
+    public Medecin getMedecinByEmail(String email) {
+        if(email == null || email.isEmpty()) {
+            return null;
+        }
+        return medecinRepository.getMedecinByEmail(email);
+    }
 }
