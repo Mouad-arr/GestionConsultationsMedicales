@@ -23,4 +23,6 @@ public interface MedecinRepository {
 
     void delete(Long id);
 
+    Medecin getMedecinByEmail(String email);
+
 }
