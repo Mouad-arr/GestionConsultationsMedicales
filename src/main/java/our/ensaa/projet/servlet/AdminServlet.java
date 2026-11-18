@@ -344,6 +344,8 @@ public class AdminServlet extends HttpServlet {
 
             adminService.createConsultation(patientId, medecinId, dateConsultation, motif);
             response.sendRedirect(request.getContextPath() + "/admin/consultations");
+        } catch (IllegalArgumentException e) {
+            flashErrorAndRedirect(request, response, "/admin/consultations", e.getMessage());
         } catch (Exception e) {
             flashErrorAndRedirect(request, response, "/admin/consultations",
                     "Erreur lors de la création de la consultation.");

@@ -9,6 +9,7 @@ import our.ensaa.projet.entity.StatusConsultation;
 import our.ensaa.projet.util.JpaUtil;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -146,6 +147,22 @@ public class ConsultationDaoImpl implements ConsultationRepository {
             if (tx.isActive()) tx.rollback();
             throw e;
         }
+    }
+
+    @Override
+    public boolean isMedecinDisponible(Long medecinId, LocalDateTime dateConsultation) {
+        String jpql = """
+                SELECT COUNT(c) FROM Consultation c
+                WHERE c.medecin.id = :medecinId
+                  AND c.dateConsultation = :dateConsultation
+                  AND c.status = :status
+                """;
+        Long count = entityManager.createQuery(jpql, Long.class)
+                .setParameter("medecinId", medecinId)
+                .setParameter("dateConsultation", dateConsultation)
+                .setParameter("status", StatusConsultation.Planifie)
+                .getSingleResult();
+        return count == 0;
     }
 
 }

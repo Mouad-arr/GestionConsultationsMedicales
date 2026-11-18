@@ -130,10 +130,21 @@ public class AdminService implements AdminInterface{
 
     @Override
     public void createConsultation(Long patientId, Long medecinId, LocalDateTime dateConsultation, String motif) {
+        // 1. La consultation ne peut pas être planifiée dans le passé.
+        if (dateConsultation == null || dateConsultation.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("La date de la consultation doit être dans le futur.");
+        }
+
         Patient patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new IllegalArgumentException("Patient introuvable"));
         Medecin medecin = medecinRepository.getMedecinById(medecinId)
                 .orElseThrow(() -> new IllegalArgumentException("Médecin introuvable"));
+
+        // 2. Le médecin doit être disponible à cette date/heure.
+        if (!consultationRepository.isMedecinDisponible(medecinId, dateConsultation)) {
+            throw new IllegalArgumentException(
+                    "Ce médecin n'est pas disponible à cette date/heure (consultation déjà planifiée).");
+        }
 
         Consultation consultation = new Consultation(dateConsultation, null, patient, medecin);
         consultation.setMotif(motif);

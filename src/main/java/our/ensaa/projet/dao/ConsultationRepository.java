@@ -4,6 +4,7 @@ import our.ensaa.projet.entity.Consultation;
 import our.ensaa.projet.entity.StatusConsultation;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,5 +31,11 @@ public interface ConsultationRepository {
     List<Consultation> search(StatusConsultation statut, LocalDate date, String medecin);
 
     void save(Consultation consultation);
+
+    /**
+     * Indique si un médecin est libre à une date/heure donnée, c'est-à-dire
+     * s'il n'a pas déjà une consultation planifiée au même créneau.
+     */
+    boolean isMedecinDisponible(Long medecinId, LocalDateTime dateConsultation);
 
 }

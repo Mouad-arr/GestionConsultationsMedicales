@@ -64,7 +64,7 @@
                             <label class="form-label fw-semibold">
                                 Date <span class="text-danger">*</span>
                             </label>
-                            <input type="date" name="date" class="form-control" required>
+                            <input type="date" name="date" id="dateInput" class="form-control" required>
                         </div>
 
                         <div class="col-md-6">
@@ -97,5 +97,9 @@
 
         </main>
 
+        <script>
+            // Bloque la sélection d'une date passée côté navigateur.
+            document.getElementById("dateInput").min = new Date().toISOString().split("T")[0];
+        </script>
     </body>
 </html>
