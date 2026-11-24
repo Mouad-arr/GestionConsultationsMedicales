@@ -1,0 +1,70 @@
+\babel@toc {french}{}\relax 
+\contentsline {chapter}{Résumé}{i}{chapter*.1}%
+\contentsline {chapter}{\numberline {1}Présentation générale du projet}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Introduction}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Contexte du projet}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Problématique}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Objectifs}{2}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Solution proposée}{3}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Méthodologie de travail}{3}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Analyse et spécification des besoins}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Présentation du système}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Identification des acteurs}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Besoins fonctionnels}{6}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Gestion des patients}{6}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Gestion des médecins}{6}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Gestion des consultations}{7}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Tableau de bord et ergonomie}{7}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Authentification et espace médecin}{8}{subsection.2.3.5}%
+\contentsline {section}{\numberline {2.4}Besoins non fonctionnels}{8}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Règles de gestion}{8}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Diagramme de cas d'utilisation}{9}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Conception du système}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Architecture générale}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Diagramme de classes}{12}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Les entités}{14}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Les relations}{14}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Les énumérations}{14}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Diagramme d'états-transitions}{15}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Dictionnaire de données}{15}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Réalisation et implémentation}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Environnement de développement}{19}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}IntelliJ IDEA}{20}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Apache Tomcat}{20}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}DBeaver}{21}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Draw.io}{21}{subsection.4.1.4}%
+\contentsline {subsection}{\numberline {4.1.5}Git et GitHub}{22}{subsection.4.1.5}%
+\contentsline {section}{\numberline {4.2}Technologies utilisées}{22}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Java 21}{23}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Jakarta EE}{23}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}JSP et Servlets}{23}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}JDBC}{24}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Hibernate }{24}{subsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.2.6}MySQL}{24}{subsection.4.2.6}%
+\contentsline {subsection}{\numberline {4.2.7}HTML, CSS, Bootstrap et JavaScript}{24}{subsection.4.2.7}%
+\contentsline {subsection}{\numberline {4.2.8}Apache Maven}{25}{subsection.4.2.8}%
+\contentsline {section}{\numberline {4.3}Structure du projet}{25}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Configuration de la connexion à la base de données}{26}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Implémentation de la couche DAO}{27}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Organisation de la couche DAO}{27}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Accès aux données avec EntityManager}{28}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Exemple d'implémentation d'une méthode DAO}{28}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Implémentation de la couche Service}{29}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Rôle de la couche Service}{29}{subsection.4.6.1}%
+\contentsline {section}{\numberline {4.7}Implémentation des Servlets}{30}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Traitement des requêtes HTTP}{30}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Communication avec les autres couches}{31}{subsection.4.7.2}%
+\contentsline {section}{\numberline {4.8}Réalisation des interfaces JSP}{31}{section.4.8}%
+\contentsline {subsection}{\numberline {4.8.1}Organisation des interfaces}{32}{subsection.4.8.1}%
+\contentsline {subsection}{\numberline {4.8.2}Présentation des interfaces réalisées}{32}{subsection.4.8.2}%
+\contentsline {subsubsection}{Page de connexion}{32}{subsection.4.8.2}%
+\contentsline {subsubsection}{Tableau de bord}{32}{figure.caption.23}%
+\contentsline {subsubsection}{Gestion des patients}{32}{figure.caption.24}%
+\contentsline {subsubsection}{Gestion des médecins}{33}{figure.caption.25}%
+\contentsline {subsubsection}{Gestion des consultations}{33}{figure.caption.26}%
+\contentsline {chapter}{\numberline {5}Conclusion générale et perspectives}{35}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Bilan du projet}{35}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Difficultés rencontrées}{35}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Compétences acquises}{36}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Améliorations possibles}{36}{section.5.4}%
+\contentsfinish 

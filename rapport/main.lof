@@ -1,0 +1,28 @@
+\babel@toc {french}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Diagramme de cas d'utilisation du système}}{9}{figure.caption.6}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architecture en couches de l'application}}{12}{figure.caption.7}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Diagramme de classes du système}}{13}{figure.caption.8}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Diagramme d'états-transitions d'une consultation}}{15}{figure.caption.9}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Environnement de développement IntelliJ IDEA}}{20}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Serveur Apache Tomcat}}{21}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Interface de gestion de base de données DBeaver}}{21}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Drawio}}{22}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Git Github}}{22}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces \relax }}{23}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Apache Maven}}{25}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Organisation générale de la structure du projet}}{26}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Principe d'organisation de la couche DAO}}{28}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Implémentation de la recherche d'un médecin par email}}{29}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Exemple d'implémentation de la couche Service}}{30}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Exemple de traitement d'une requête dans une Servlet}}{31}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Interface permettant aux utilisateurs d'accéder à l'application.}}{32}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Présentation générale des principales informations et fonctionnalités..}}{32}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Consultation et gestion des informations des patients .}}{33}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Présentation des informations relatives aux médecins.}}{33}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Interface de gestion et de suivi des consultations médicales.}}{34}{figure.caption.27}%
+\addvspace {10\p@ }
+\contentsfinish 

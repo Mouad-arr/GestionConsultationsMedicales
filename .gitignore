@@ -40,3 +40,18 @@ build/
 .DS_Store
 
 .env
+
+.aux
+.acn
+.alg
+.acr
+.glg
+.glo
+.gls
+.ist
+.lof
+.log
+.lot
+.out
+.gz
+.toc

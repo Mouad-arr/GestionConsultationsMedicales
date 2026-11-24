@@ -1,0 +1,33 @@
+\documentclass[12pt, a4paper]{report}
+
+\input{preamble}
+
+\title{Gestion des Consultations Médicales}
+\author{Mohammed Laadimi \and Mouad Ouchelh}
+\date{\today}
+
+\begin{document}
+
+\include{cover/page-garde}
+
+\pagenumbering{roman}
+
+\include{chapters/resume}
+
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
+
+\pagenumbering{arabic}
+
+\include{chapters/chapitre1}
+\include{chapters/chapitre2}
+\include{chapters/chapitre3}
+\input{chapters/04_realisationEtImplementation}
+\input{chapters/05_conclusion}
+\input{bibliography/bibliographie}
+
+\end{document}
