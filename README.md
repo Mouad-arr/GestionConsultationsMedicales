@@ -113,13 +113,13 @@ Avant de lancer le projet, assurez-vous de disposer des outils suivants :
 ### 1. Cloner le dépôt
 
 ```bash
-git clone https://github.com/Mouad-arr/GestionConsultaionsMedicales
+git clone https://github.com/Mouad-arr/GestionConsultationsMedicales
 ```
 
 Accéder au répertoire du projet :
 
 ```bash
-cd GestionConsultaionsMedicales
+cd GestionConsultationsMedicales
 ```
 
 ### 2. Configurer la base de données
@@ -161,7 +161,7 @@ Cette commande permet de compiler le projet et de télécharger les dépendances
 Exemple :
 
 ```text
-http://localhost:8080/GestionConsultaionsMedicales
+http://localhost:8080/GestionConsultationsMedicales
 ```
 
 ## 👥 Équipe de réalisation
